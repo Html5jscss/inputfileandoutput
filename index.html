@@ -1,0 +1,29 @@
+<input type="file" >
+
+<button type="button">Download</button>
+<script>
+document.getElementsByTagName("input")[0].addEventListener("change", loadFile);
+
+document.getElementsByTagName("button")[0].addEventListener("click", downloadFile);
+
+let linkbase64 = "";
+
+function loadFile(event) {
+  let reader = new FileReader();
+  let file = event.target.files[0];
+  window.alert( file );
+
+  reader.readAsDataURL(file);
+  reader.onloadend = () => {
+    linkbase64 = reader.result;
+  };
+}
+
+function downloadFile() {
+  let nameFile = "megaman.png";
+  var a = document.createElement("a");
+  a.href = linkbase64;
+  a.download = nameFile;
+  a.click();
+}
+</script>
